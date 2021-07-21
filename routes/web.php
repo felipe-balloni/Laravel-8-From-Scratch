@@ -18,17 +18,15 @@ Route::get('/', function () {
 });
 
 Route::get('post/{slug}', function ($slug) {
-    $path = __DIR__ . "/../resources/posts/{$slug}.html";
-
-    if (! file_exists($path)) {
+    if (! file_exists($path = __DIR__ . "/../resources/posts/{$slug}.html")) {
         return redirect('/');
 //        ddd('file does not exist');
 //        abort(404);
     }
 
-    $post = file_get_contents($path);
+    $post = cache()->remember("posts.{$slug}", now()->addMinute(90), function () use ($path) {
+        return file_get_contents($path);
+    });
 
-    return view('post', [
-       'post' => $post
-   ]);
+    return view('post', ['post' => $post ]);
 })->where('post','[A-z_\-0-9]+');
