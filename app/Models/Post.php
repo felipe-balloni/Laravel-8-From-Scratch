@@ -7,7 +7,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
-use function Symfony\Component\String\s;
 
 class Post
 {
@@ -41,6 +40,17 @@ class Post
         return static::all()->firstWhere('slug', $slug);
     }
 
+    public static function findOrFail($slug)
+    {
+        $post = static::find($slug);
+
+        if (! $post) {
+            throw new ModelNotFoundException();
+        }
+
+        return $post;
+    }
+
     public static function all()
     {
 
@@ -56,7 +66,7 @@ class Post
 //        }, \Illuminate\Support\Facades\File::files(resource_path("posts")));
 
         return cache()->rememberForever('post.all', function (){
-            return collect(\Illuminate\Support\Facades\File::files(resource_path("posts")))
+            return collect(File::files(resource_path("posts")))
                 ->map(fn($file) => YamlFrontMatter::parseFile($file))
                 ->map(fn($document) => new Post(
                     $document->title,
