@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -15,17 +16,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-
     return view('posts', [
-        'posts' => Post::all()
+        'posts' => Post::with('user', 'category')->get()
     ]);
-
 });
 
-Route::get('post/{slug}', function ($slug) {
-
+Route::get('post/{post:slug}', function (Post $post) {
     return view('post', [
-        'post' => Post::findOrFail($slug)
+        'post' => $post
     ]);
-
 })->where('post', '[A-z_\-0-9]+');
+
+Route::get('categories/{category:slug}', function (Category $category) {
+   return view('posts', [
+       'posts' => $category->posts
+   ]);
+});
