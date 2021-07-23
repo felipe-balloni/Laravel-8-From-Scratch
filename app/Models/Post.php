@@ -38,7 +38,7 @@ class Post
 //
 //        return cache()->remember("posts.{$slug}", 5, fn() => file_get_contents($path));
 
-        return cache()->remember("posts.{$slug}", 5, fn() => static::all()->firstWhere('slug', $slug))  ;
+        return static::all()->firstWhere('slug', $slug);
     }
 
     public static function all()
@@ -55,15 +55,18 @@ class Post
 //            );
 //        }, \Illuminate\Support\Facades\File::files(resource_path("posts")));
 
-        return collect(\Illuminate\Support\Facades\File::files(resource_path("posts")))
-            ->map(fn($file) => YamlFrontMatter::parseFile($file))
-            ->map(fn($document) => new Post(
-                $document->title,
-                $document->excerpt,
-                $document->date,
-                $document->body(),
-                $document->slug,
-            ));
+        return cache()->rememberForever('post.all', function (){
+            return collect(\Illuminate\Support\Facades\File::files(resource_path("posts")))
+                ->map(fn($file) => YamlFrontMatter::parseFile($file))
+                ->map(fn($document) => new Post(
+                    $document->title,
+                    $document->excerpt,
+                    $document->date,
+                    $document->body(),
+                    $document->slug,
+                ))
+                ->sortByDesc('date');
+        });
     }
 
 }
