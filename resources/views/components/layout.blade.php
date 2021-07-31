@@ -5,7 +5,7 @@
     <title>Laravel from Scratch Blog</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
+    <script defer src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
 
