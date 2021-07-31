@@ -6,7 +6,7 @@
             <img alt="Blog Post illustration" class="rounded-xl" src="/images/illustration-4.png">
         </div>
 
-        <div class="flex-1 flex flex-col justify-between">
+        <div class="mt-6 flex flex-col justify-between flex-1">
             <header class="mt-8">
                 <x-category-button :category="$post->category" />
 
@@ -20,10 +20,8 @@
                 </div>
             </header>
 
-            <div class="text-sm mt-2">
-                <p>
-                    {{ $post->excerpt }}
-                </p>
+            <div class="text-sm mt-2 space-y-4">
+                {!! $post->excerpt !!}
             </div>
 
             <footer class="flex justify-between items-center mt-8">
@@ -34,8 +32,9 @@
                         <h6>Mascot at Laracasts</h6>
                     </div>
                 </div>
-                <div class="hidden md:block md:whitespace-nowrap">
-                    <a class="text-sm font-semibold bg-gray-200 rounded-full px-8 py-2" href="/post/{{ $post->slug }}">
+                <div class="hidden lg:block md:whitespace-nowrap">
+                    <a class="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-gray-300 rounded-full py-2 px-8"
+                       href="/post/{{ $post->slug }}">
                         Read More
                     </a>
                 </div>

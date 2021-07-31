@@ -2,35 +2,58 @@
     <h1 class="text-4xl">
         Latest <span class="text-blue-500">Laravel From Scratch</span> News
     </h1>
-    <h2 class="inline-flex mt-2">By Lary Laracore <img alt="Head of Lary mascot" src="./images/lary-head.svg">
-    </h2>
-    <p class="text-sm mt-14">
-        Another year. Another update. We're refreshing the popular Laravel series with new content.
-        I'm going to keep you guys to speed with what's going on!
-    </p>
 
-    <div class="space-y-2 md:space-y-0 md:space-x-4 mt-8">
-        <div class="relative flex md:inline-flex items-center">
-            <label class="hidden" for="category">Category</label>
-            <select class="flex-1 py-3 border-none
-                rounded-xl bg-gray-100 text-sm font-semibold" id="category" name="Category">
-                <option disabled selected value="">Category</option>
-                <option value="personal">Personal</option>
-                <option value="business">Business</option>
-            </select>
+    <div class="space-y-2 md:space-y-0 md:space-x-4 mt-4">
+
+        <div class="relative md:inline-flex bg-gray-100 rounded-xl">
+            <x-dropdown>
+                <x-slot name="trigger">
+                    <button
+                        class="block text-left text-sm font-semibold appearance-none w-full rounded-xl bg-gray-100 border-none hover:border-gray-500 px-4 py-3 pr-8 shadow leading-tight focus:outline-none focus:shadow-outline">
+                        {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Categories' }}
+
+                        <x-icon name="down-arrow" class="text-gray-500" style="right: 12px;"/>
+                    </button>
+                </x-slot>
+
+                <x-dropdown-item href="/" :active="request()->routeIs('home')">All</x-dropdown-item>
+
+                @foreach ($categories as $category)
+                    <x-dropdown-item
+                        href="/categories/{{ $category->slug }}"
+                        :active='request()->is("categories/{$category->slug}")'
+                    >{{ ucwords($category->name) }}</x-dropdown-item>
+                @endforeach
+            </x-dropdown>
         </div>
-        <div class="relative flex md:inline-flex items-center">
-            <label class="hidden" for="otherFilters">Other Filters</label>
-            <select class="flex-1 py-3 border-none
-                rounded-xl bg-gray-100 text-sm font-semibold" id="otherFilters" name="otherFilters">
-                <option disabled selected value="">Other Filters</option>
-                <option value="foo">Foo</option>
-                <option value="bar">Bar</option>
-            </select></div>
-        <div class="relative flex md:inline-flex items-center">
+
+        <div class="relative md:inline-flex bg-gray-100 rounded-xl">
+            <x-dropdown>
+                <x-slot name="trigger">
+                    <button class="block text-left text-sm font-semibold appearance-none w-full rounded-xl bg-gray-100
+                                   border-none hover:border-gray-500 px-4 py-3 pr-8 shadow leading-tight focus:outline-none focus:shadow-outline">
+                        {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Other Filters' }}
+
+                        <x-icon name="down-arrow" class="text-gray-500" style="right: 12px;"/>
+                    </button>
+                </x-slot>
+
+                <x-dropdown-item href="/" :active="request()->routeIs('home')">All</x-dropdown-item>
+
+                @foreach ($categories as $category)
+                    <x-dropdown-item
+                        href="/categories/{{ $category->slug }}"
+                        :active='request()->is("categories/{$category->slug}")'
+                    >{{ ucwords($category->name) }}</x-dropdown-item>
+                @endforeach
+            </x-dropdown>
+        </div>
+
+        <div class="relative md:inline-flex items-center">
             <label class="hidden" for="search">Search</label>
-            <input class="flex-1 py-3 border-none
-                rounded-xl bg-gray-100 text-sm font-semibold placeholder-black" id="search" name="search"
+            <input class="flex-1 text-sm font-semibold appearance-none w-full md:w-52 rounded-xl bg-gray-100
+                          border-none hover:border-gray-500 px-4 py-3 shadow leading-tight focus:outline-none focus:shadow-outline
+                          placeholder-black" id="search" name="search"
                    placeholder="Find something" type="text">
         </div>
     </div>
