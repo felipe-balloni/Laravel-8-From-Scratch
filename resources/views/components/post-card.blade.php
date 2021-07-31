@@ -8,10 +8,7 @@
 
         <div class="flex-1 flex flex-col justify-between">
             <header class="mt-8">
-                <div class="space-x-2">
-                    <a class="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"
-                       href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
-                </div>
+                <x-category-button :category="$post->category" />
 
                 <div class="mt-4">
                     <h1 class="text-3xl">
