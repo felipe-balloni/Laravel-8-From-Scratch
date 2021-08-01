@@ -32,7 +32,10 @@
         {{--        </div>--}}
 
         <div class="relative md:inline-flex items-center">
-            <form action="#" method="GET">
+            <form method="GET" action="/">
+                @if (request('category'))
+                    <input type="hidden" name="category" value="{{ request('category') }}">
+                @endif
                 <label class="hidden" for="search">Search</label>
                 <input class="flex-1 text-sm font-semibold appearance-none w-full md:w-72 rounded-xl bg-gray-100
                               border-none hover:border-gray-500 px-4 py-3 shadow leading-tight focus:outline-none focus:shadow-outline
