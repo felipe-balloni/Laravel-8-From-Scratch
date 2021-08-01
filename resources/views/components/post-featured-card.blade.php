@@ -31,8 +31,9 @@
                 <div class="flex items-center text-sm">
                     <img alt="Lary avatar" src="/images/lary-avatar.svg">
                     <div class="ml-3">
-                        <h5 class="font-bold">{{ $post->author->name }}</h5>
-                        <h6>Mascot at Laracasts</h6>
+                        <h5 class="font-bold">
+                            <a href="/?author={{ $post->author->username }} ">{{ $post->author->name }}</a>
+                        </h5>
                     </div>
                 </div>
                 <div class="hidden md:block md:whitespace-nowrap">
