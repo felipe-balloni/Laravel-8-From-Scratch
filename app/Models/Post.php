@@ -17,6 +17,16 @@ class Post extends Model
         'body'
     ];
 
+    protected $with = ['category', 'author'];
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            $query->where('title', 'like', '%' . $search . '%')
+                  ->orWhere('excerpt', 'like', '%' . $search . '%');
+        });
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

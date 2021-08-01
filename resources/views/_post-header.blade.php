@@ -9,7 +9,7 @@
             <x-dropdown>
                 <x-slot name="trigger">
                     <button
-                        class="block text-left text-sm font-semibold appearance-none w-full rounded-xl bg-gray-100 border-none hover:border-gray-500 px-4 py-3 pr-8 shadow leading-tight focus:outline-none focus:shadow-outline">
+                            class="block text-left text-sm font-semibold appearance-none w-full rounded-xl bg-gray-100 border-none hover:border-gray-500 px-4 py-3 pr-8 shadow leading-tight focus:outline-none focus:shadow-outline">
                         {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Categories' }}
 
                         <x-icon name="down-arrow" class="text-gray-500" style="right: 12px;"/>
@@ -20,41 +20,48 @@
 
                 @foreach ($categories as $category)
                     <x-dropdown-item
-                        href="/categories/{{ $category->slug }}"
-                        :active='request()->is("categories/{$category->slug}")'
+                            href="/categories/{{ $category->slug }}"
+                            :active='request()->is("categories/{$category->slug}")'
                     >{{ ucwords($category->name) }}</x-dropdown-item>
                 @endforeach
             </x-dropdown>
         </div>
 
-        <div class="relative md:inline-flex bg-gray-100 rounded-xl">
-            <x-dropdown>
-                <x-slot name="trigger">
-                    <button class="block text-left text-sm font-semibold appearance-none w-full rounded-xl bg-gray-100
-                                   border-none hover:border-gray-500 px-4 py-3 pr-8 shadow leading-tight focus:outline-none focus:shadow-outline">
-                        {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Other Filters' }}
+        {{--        <div class="relative md:inline-flex bg-gray-100 rounded-xl">--}}
+        {{--            <x-dropdown>--}}
+        {{--                <x-slot name="trigger">--}}
+        {{--                    <button class="block text-left text-sm font-semibold appearance-none w-full rounded-xl bg-gray-100--}}
+        {{--                                   border-none hover:border-gray-500 px-4 py-3 pr-8 shadow leading-tight focus:outline-none focus:shadow-outline">--}}
+        {{--                        {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Other Filters' }}--}}
 
-                        <x-icon name="down-arrow" class="text-gray-500" style="right: 12px;"/>
-                    </button>
-                </x-slot>
+        {{--                        <x-icon name="down-arrow" class="text-gray-500" style="right: 12px;"/>--}}
+        {{--                    </button>--}}
+        {{--                </x-slot>--}}
 
-                <x-dropdown-item href="/" :active="request()->routeIs('home')">All</x-dropdown-item>
+        {{--                <x-dropdown-item href="/" :active="request()->routeIs('home')">All</x-dropdown-item>--}}
 
-                @foreach ($categories as $category)
-                    <x-dropdown-item
-                        href="/categories/{{ $category->slug }}"
-                        :active='request()->is("categories/{$category->slug}")'
-                    >{{ ucwords($category->name) }}</x-dropdown-item>
-                @endforeach
-            </x-dropdown>
-        </div>
+        {{--                @foreach ($categories as $category)--}}
+        {{--                    <x-dropdown-item--}}
+        {{--                        href="/categories/{{ $category->slug }}"--}}
+        {{--                        :active='request()->is("categories/{$category->slug}")'--}}
+        {{--                    >{{ ucwords($category->name) }}</x-dropdown-item>--}}
+        {{--                @endforeach--}}
+        {{--            </x-dropdown>--}}
+        {{--        </div>--}}
 
         <div class="relative md:inline-flex items-center">
-            <label class="hidden" for="search">Search</label>
-            <input class="flex-1 text-sm font-semibold appearance-none w-full md:w-52 rounded-xl bg-gray-100
-                          border-none hover:border-gray-500 px-4 py-3 shadow leading-tight focus:outline-none focus:shadow-outline
-                          placeholder-black" id="search" name="search"
-                   placeholder="Find something" type="text">
+            <form action="#" method="GET">
+                <label class="hidden" for="search">Search</label>
+                <input class="flex-1 text-sm font-semibold appearance-none w-full md:w-72 rounded-xl bg-gray-100
+                              border-none hover:border-gray-500 px-4 py-3 shadow leading-tight focus:outline-none focus:shadow-outline
+                              placeholder-black"
+                       id="search"
+                       name="search"
+                       placeholder="Find something"
+                       type="text"
+                       value="{{ request('search') }}">
+            </form>
         </div>
+
     </div>
 </header>
