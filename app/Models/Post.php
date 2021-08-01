@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use phpDocumentor\Reflection\DocBlock\Tags\Reference\Reference;
 
 class Post extends Model
 {
@@ -23,8 +24,24 @@ class Post extends Model
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
             $query->where('title', 'like', '%' . $search . '%')
-                  ->orWhere('excerpt', 'like', '%' . $search . '%');
+                ->orWhere('excerpt', 'like', '%' . $search . '%');
         });
+
+//        Para minha referência
+//        $query->when($filters['category'] ?? false, function ($query, $category) {
+//            $query
+//                ->whereExists(fn($query) =>
+//                    $query->from('categories')
+//                          ->whereColumn('categories.id', 'posts.category_id')
+//                          ->where('categories.slug', $category)
+//                );
+//        });
+
+        $query->when($filters['category'] ?? false, function ($query, $category) {
+            $query->whereHas('category', fn($query) =>
+                $query->whereSlug($category)
+            );
+       });
     }
 
     public function category()
@@ -34,7 +51,7 @@ class Post extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'user_id' );
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }
