@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use phpDocumentor\Reflection\DocBlock\Tags\Reference\Reference;
 
 class Post extends Model
 {
@@ -38,10 +37,14 @@ class Post extends Model
 //        });
 
         $query->when($filters['category'] ?? false, function ($query, $category) {
-            $query->whereHas('category', fn($query) =>
-                $query->whereSlug($category)
+            $query->whereHas('category', fn($query) => $query->whereSlug($category)
             );
-       });
+        });
+
+        $query->when($filters['author'] ?? false, function ($query, $author) {
+            $query->whereHas('author', fn($query) => $query->whereUserna($author)
+            );
+        });
     }
 
     public function category()

@@ -21,8 +21,8 @@ Route::get('post/{post:slug}', [\App\Http\Controllers\PostController::class, 'sh
     ->where('post', '[A-z_\-0-9]+')
     ->name('post');
 
-Route::get('authors/{author}', function (User $author) {
-    return view('posts', [
+Route::get('authors/{author:username}', function (User $author) {
+    return view('posts.index', [
         'posts' => $author->posts,
     ]);
 })->name('author');
