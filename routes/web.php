@@ -22,9 +22,7 @@ Route::get('post/{post:slug}', [\App\Http\Controllers\PostController::class, 'sh
     ->name('post');
 
 Route::get('authors/{author}', function (User $author) {
-//    dd($author);
     return view('posts', [
         'posts' => $author->posts,
-        'categories' => Category::all()
     ]);
 })->name('author');
