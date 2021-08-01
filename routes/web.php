@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Category;
-use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -16,31 +15,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('posts', [
-        'posts' => Post::latest()->with(['author', 'category'])->get(),
-        'categories' => Category::all()
-    ]);
-});
+Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('home');
 
-Route::get('post/{post:slug}', function (Post $post) {
-    return view('post', [
-        'post' => $post
-    ]);
-})->where('post', '[A-z_\-0-9]+');
+Route::get('post/{post:slug}', [\App\Http\Controllers\PostController::class, 'show'])
+    ->where('post', '[A-z_\-0-9]+')
+    ->name('post');
 
 Route::get('categories/{category:slug}', function (Category $category) {
-   return view('posts', [
-       'posts' => $category->posts->load(['author' , 'category']),
-       'currentCategory' => $category,
-       'categories' => Category::all()
-   ]);
-});
+    return view('posts', [
+        'posts' => $category->posts,
+        'currentCategory' => $category,
+        'categories' => Category::all()
+    ]);
+})->name('category');
 
 Route::get('authors/{author}', function (User $author) {
 //    dd($author);
     return view('posts', [
-        'posts' => $author->posts->load(['author' , 'category']),
+        'posts' => $author->posts,
         'categories' => Category::all()
     ]);
-});
+})->name('author');
