@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 
         Category::factory(3)->create();
 
-        for ($i = 0; $i <= 5; $i++) {
+        for ($i = 0; $i <= 10; $i++) {
             Post::factory(5)->create([
                 'user_id' => $user->id,
                 'category_id' => rand(1, 3),

@@ -1,24 +1,13 @@
 <x-layout>
-
-    @include('posts._header')
-
-    <main class="md:max-w-6xl mx-auto mt-6 md:mt-10 lg:mt-20 space-y-6">
-        
+    @include ('posts._header')
+    <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
         @if ($posts->count())
-            <x-post-featured-card :post="$posts[0]"/>
+            <x-posts-grid :posts="$posts" />
 
-            @if ($posts->count() > 1)
-                <div class="md:grid md:grid-cols-6">
-                    @foreach ($posts->skip(1) as $post)
-                        <x-post-card :post="$post" class="{{ $loop->iteration < 3 ? 'col-span-3' : 'col-span-2' }}"/>
-                    @endforeach
-                </div>
-            @endif
+            {{ $posts->links() }}
         @else
-            <p class="text-center">No posts yet. Please check back later!</p>
+            <p class="text-center">No posts yet. Please check back later.</p>
         @endif
-
     </main>
-
 </x-layout>
 
