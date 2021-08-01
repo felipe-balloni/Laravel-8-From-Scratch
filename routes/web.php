@@ -20,9 +20,3 @@ Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('h
 Route::get('post/{post:slug}', [\App\Http\Controllers\PostController::class, 'show'])
     ->where('post', '[A-z_\-0-9]+')
     ->name('post');
-
-Route::get('authors/{author}', function (User $author) {
-    return view('posts', [
-        'posts' => $author->posts,
-    ]);
-})->name('author');

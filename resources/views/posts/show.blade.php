@@ -14,9 +14,9 @@
                     <div class="flex items-center lg:justify-center text-sm mt-4">
                         <img alt="Lary avatar" src="/images/lary-avatar.svg">
                         <div class="ml-3 text-left">
-                            <h5 class="font-bold">{{ $post->author->name }}</h5>
-                            <h6>Mascot at Laracasts</h6>
-                        </div>
+                            <h5 class="font-bold">
+                                <a href="/authors/{{ $post->author->username }}">{{ $post->author->name }}</a>
+                            </h5>
                     </div>
                 </div>
 
