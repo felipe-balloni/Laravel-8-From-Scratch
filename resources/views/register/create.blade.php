@@ -54,7 +54,7 @@
                            name="email"
                            id="email"
                            value="{{ old('email') }}"
-                           placeholder="A valid email, we'll use active you account."
+                           placeholder="Must be unique and a valid email."
                            required>
 
                     @error('email')
