@@ -23,7 +23,7 @@
                          placeholder="Re-type your password for double check." required/>
 
                 <div class="flex items-center justify-end mt-4">
-                    <x-button class="bg-blue-400">
+                    <x-button class="bg-blue-500 hover:bg-blue-700">
                         {{ __('Reset Password') }}
                     </x-button>
                 </div>

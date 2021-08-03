@@ -1,5 +1,4 @@
 <x-layout>
-
     <section class="px-6 py-8">
         <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
             <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
@@ -7,7 +6,7 @@
                     <img alt="" class="rounded-xl" src="/images/illustration-1.png">
 
                     <p class="mt-4 block text-gray-400 text-xs">
-                        Published
+                        Published at
                         <time>{{ $post->created_at->diffForHumans() }}</time>
                     </p>
 
@@ -15,8 +14,9 @@
                         <img alt="Lary avatar" src="/images/lary-avatar.svg">
                         <div class="ml-3 text-left">
                             <h5 class="font-bold">
-                                <a href="/?author={{ $post->author->username }}">{{ $post->author->name }}</
+                                <a href="/?author={{ $post->author->username }}">{{ $post->author->name }}</a>
                             </h5>
+                        </div>
                     </div>
                 </div>
 
@@ -26,7 +26,8 @@
                            href="/">
                             <svg class="mr-2" height="22" viewBox="0 0 22 22" width="22">
                                 <g fill="none" fill-rule="evenodd">
-                                    <path d="M21 1v20.16H.84V1z" stroke="#000" stroke-opacity=".012" stroke-width=".5">
+                                    <path d="M21 1v20.16H.84V1z" stroke="#000" stroke-opacity=".012"
+                                          stroke-width=".5">
                                     </path>
                                     <path class="fill-current"
                                           d="M13.854 7.224l-3.847 3.856 3.847 3.856-1.184 1.184-5.04-5.04 5.04-5.04z">
@@ -38,7 +39,7 @@
                         </a>
 
                         <div class="space-x-2">
-                            <x-category-button :category="$post->category" />
+                            <x-category-button :category="$post->category"/>
                         </div>
                     </div>
 
@@ -50,7 +51,16 @@
                         {!! $post->body !!}
                     </div>
                 </div>
+
+                <section class="col-span-8 col-start-5 mt-10 space-y-6">
+                    <h2 class="font-semibold text-gray-900">Comments...:</h2>
+                    <x-post-comment />
+                    <x-post-comment />
+                    <x-post-comment />
+                    <x-post-comment />
+                </section>
             </article>
+
         </main>
 
     </section>

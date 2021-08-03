@@ -18,7 +18,7 @@
                     @csrf
 
                     <div>
-                        <x-button class="bg-blue-400">
+                        <x-button class="bg-blue-500 hover:bg-blue-700">
                             {{ __('Resend Verification Email') }}
                         </x-button>
                     </div>
