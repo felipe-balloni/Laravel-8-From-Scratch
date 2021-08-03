@@ -16,8 +16,22 @@
                 <img alt="Lacarasts Logo" height="16" src="/images/logo.svg" width="165">
             </a>
         </div>
-        <div class="mt-8 md:mt-0">
-            <a class="text-xs font-bold uppercase" href="/">Home Page</a>
+
+        <div class="mt-8 md:mt-0 flex items-center">
+
+            @auth
+                <span class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}!</span>
+
+                <form method="POST" action="/logout" class="text-xs text-blue-500 mx-6">
+                    @csrf
+
+                    <button type="submit" class="font-bold">Log Out</button>
+                </form>
+            @else
+                <a href="/register" class="mr-6 text-xs font-bold uppercase">Register</a>
+                <a href="/login" class="mr-6 text-xs font-bold uppercase">Log In</a>
+            @endauth
+
             <a class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase px-5 py-3" href="#">Subscribe
                 for Updates</a>
         </div>

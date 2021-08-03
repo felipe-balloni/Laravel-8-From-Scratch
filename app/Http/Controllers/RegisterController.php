@@ -22,8 +22,10 @@ class RegisterController extends Controller
                                               'password_confirmation' => 'required_with:password|same:password|min:9',
                                           ]);
 
-        User::create($attributes);
+        $user = User::create($attributes);
 
-        return redirect('/')->with('success', 'Your account has been created.');
+        auth()->login($user);
+
+        return redirect('/')->with('success', 'Your account has been created and you logged-in.');
     }
 }
