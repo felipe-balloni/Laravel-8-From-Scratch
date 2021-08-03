@@ -6,7 +6,7 @@
     <div class="space-y-2 md:space-y-0 md:space-x-4 mt-4">
 
         <div class="relative md:inline-flex bg-gray-100 rounded-xl">
-            <x-category-dropdown />
+            <x-category-dropdown/>
         </div>
 
         {{--        <div class="relative md:inline-flex bg-gray-100 rounded-xl">--}}
@@ -37,9 +37,8 @@
                     <input type="hidden" name="category" value="{{ request('category') }}">
                 @endif
                 <label class="hidden" for="search">Search</label>
-                <input class="flex-1 text-sm font-semibold appearance-none w-full md:w-72 rounded-xl bg-gray-100
-                              border-none hover:border-gray-500 px-4 py-3 shadow leading-tight focus:outline-none focus:shadow-outline
-                              placeholder-black"
+                <input class="flex-1 text-sm appearance-none w-full md:w-72 rounded-xl bg-gray-100 placeholder-black
+                              border-none px-4 py-3 shadow leading-tight focus:outline-none focus:shadow-outline"
                        id="search"
                        name="search"
                        placeholder="Find something"
