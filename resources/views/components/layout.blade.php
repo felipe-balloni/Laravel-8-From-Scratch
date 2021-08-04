@@ -32,8 +32,8 @@
                 <a href="{{ route('login') }}" class="mr-6 text-xs font-bold uppercase hover:underline">Log In</a>
             @endauth
 
-            <a class="bg-blue-500 hover:bg-blue-700 ml-3 rounded-full text-xs font-semibold text-white uppercase px-5 py-3" href="#">Subscribe
-                for Updates</a>
+            <a class="bg-blue-500 hover:bg-blue-700 ml-3 rounded-full text-xs font-semibold text-white uppercase px-5 py-3"
+               href="#">Subscribe for Updates</a>
         </div>
     </nav>
 
