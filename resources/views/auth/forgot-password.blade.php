@@ -16,7 +16,7 @@
                 <x-input name="email" class="block mt-1 w-full" placeholder="Your registered email" type="email" required autofocus/>
 
                 <div class="flex items-center justify-end mt-4">
-                    <x-button class="bg-blue-400">
+                    <x-button class="bg-blue-500 hover:bg-blue-700">
                         {{ __('Email Password Reset Link') }}
                     </x-button>
                 </div>
