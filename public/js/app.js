@@ -2363,7 +2363,7 @@ function performTransition(el, stages, entering) {
       while (this.beforeCancels.length) {
         this.beforeCancels.shift()();
       }
-      ;
+
       finish();
     }),
     finish,
@@ -4945,6 +4945,54 @@ module.exports = {
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+var back2Top = document.querySelector("#back2Top");
+var htmlEl = document.querySelector("html");
+htmlEl.style.scrollBehavior = "smooth";
+
+var smoothScroll = function smoothScroll(target, duration) {
+  var ssTarget = document.querySelector(target);
+  var ssStart = window.pageYOffset;
+  var ssTargetTop = ssTarget.getBoundingClientRect().top;
+  var startTime = 0;
+
+  var ssAni = function ssAni(now) {
+    if (startTime === 0) startTime = now;
+    var elapsedTime = now - startTime;
+    var ease = easing(Math.min(elapsedTime / duration, 1));
+    window.scroll(0, ssStart + ssTargetTop * ease);
+    console.log(elapsedTime / duration, " ease:", ease);
+
+    if (elapsedTime < duration) {
+      requestAnimationFrame(ssAni);
+    }
+  };
+
+  requestAnimationFrame(ssAni);
+};
+
+window.addEventListener('scroll', function (e) {
+  if (window.scrollY >= 400) {
+    back2Top.classList.remove('hidden');
+    back2Top.classList.add('block');
+  } else {
+    back2Top.classList.remove('block');
+    back2Top.classList.add('hidden');
+  }
+});
+back2Top.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  if (getComputedStyle(htmlEl).scrollBehavior === "smooth") {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  } else {
+    smoothScroll("html", 1000);
+  }
+});
 
 /***/ }),
 
