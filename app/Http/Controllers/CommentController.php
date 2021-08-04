@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 
 class CommentController extends Controller
 {
     /**
      * @param Post $post
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function store(Post $post): \Illuminate\Http\RedirectResponse
+    public function store(Post $post): RedirectResponse
     {
         request()->validate([
             'body' => 'required|min:5'

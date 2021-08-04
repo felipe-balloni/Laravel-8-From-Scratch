@@ -30,4 +30,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'convertkit' => [
+        'url' => env('CONVERTKIT_BASE_URL'),
+        'key' => env('CONVERTKIT_API_KEY'),
+        'secret' => env('CONVERTKIT_API_SECRET'),
+        'form_id' => env('CONVERT_KIT_FORM_ID'),
+    ],
+
 ];
