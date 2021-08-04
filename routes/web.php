@@ -34,11 +34,18 @@ Route::post('subscribe', function () {
         'email' => 'required|email'
     ]);
 
-    $response = \Illuminate\Support\Facades\Http::post(config('services.convertkit.url') . '/v3/forms/' . config('services.convertkit.form_id') . '/subscribe',[
-        'api_key' => config('services.convertkit.key'),
-        'email' => request( 'email'),
-        'tag' => ['Blog'],
-     ])->json();
+    try {
+        $response = \Illuminate\Support\Facades\Http::post(
+            config('services.convertkit.url') . '/v3/forms/' . config('services.convertkit.form_id') . '/subscribe',
+            [
+                'api_key' => config('services.convertkit.key'),
+                'email' => request('email'),
+                'tag' => ['Blog'],
+            ]
+        )->json();
+    } catch (\Exception $e) {
+        \Illuminate\Validation\ValidationException::withMessages(['email' => 'This email is invalid!']);
+    };
 
     return redirect('/')->with('success', 'You are signed up for our newsletter');
 })->name('subscribe');
