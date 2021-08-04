@@ -25,14 +25,14 @@
                 <form method="POST" action="{{ route('logout') }}" class="text-xs text-blue-500 mx-6">
                     @csrf
 
-                    <button type="submit" class="font-bold">Log Out</button>
+                    <button type="submit" class="font-bold hover:underline">Log Out</button>
                 </form>
             @else
-                <a href="{{ route('register') }}" class="mr-6 text-xs font-bold uppercase">Register</a>
-                <a href="{{ route('login') }}" class="mr-6 text-xs font-bold uppercase">Log In</a>
+                <a href="{{ route('register') }}" class="mr-6 text-xs font-bold uppercase hover:underline">Register</a>
+                <a href="{{ route('login') }}" class="mr-6 text-xs font-bold uppercase hover:underline">Log In</a>
             @endauth
 
-            <a class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase px-5 py-3" href="#">Subscribe
+            <a class="bg-blue-500 hover:bg-blue-700 ml-3 rounded-full text-xs font-semibold text-white uppercase px-5 py-3" href="#">Subscribe
                 for Updates</a>
         </div>
     </nav>
@@ -55,7 +55,7 @@
                                placeholder="Your email address"
                                type="email">
                     </div>
-                    <button class="mt-4 md:mt-0 bg-blue-500 hover:bg-blue-600 ml-3 rounded-full text-xs font-semibold text-white py-3 px-8"
+                    <button class="mt-4 md:mt-0 bg-blue-500 hover:bg-blue-700 ml-3 rounded-full text-xs font-semibold text-white py-3 px-8"
                             type="submit">
                         Subscribe
                     </button>

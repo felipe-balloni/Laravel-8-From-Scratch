@@ -55,7 +55,7 @@
                 <section class="col-span-8 col-start-5 mt-10 space-y-6">
                     <h2 class="font-semibold text-gray-900">Comments...:</h2>
 
-                    <x-comment-form />
+                    <x-comment-form :post="$post"/>
 
                     @foreach($post->comments as $comment)
                         <x-post-comment :comment="$comment"/>
