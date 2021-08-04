@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use Illuminate\Support\Facades\Route;
@@ -15,39 +18,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('home');
+Route::get('/', [PostController::class, 'index'])->name('home');
 
-Route::get('post/{post:slug}', [\App\Http\Controllers\PostController::class, 'show'])
+Route::get('post/{post:slug}', [PostController::class, 'show'])
     ->where('post', '[A-z_\-0-9]+')
     ->name('post');
 
-Route::post('posts/{post:slug}/comments', [\App\Http\Controllers\CommentController::class, 'store'])
+Route::post('posts/{post:slug}/comments', [CommentController::class, 'store'])
     ->name('comment.store')->middleware('auth');
 
-//Route::get('newsletter', function () {
-//    $response = \Illuminate\Support\Facades\Http::get(config('services.convertkit.url') . '/v3/forms', [ 'api_key' => config('services.convertkit.key')])->json();
-//        ddd($response);
-//});
-
-Route::post('subscribe', function () {
-    request()->validate([
-        'email' => 'required|email'
-    ]);
-
-    try {
-        $response = \Illuminate\Support\Facades\Http::post(
-            config('services.convertkit.url') . '/v3/forms/' . config('services.convertkit.form_id') . '/subscribe',
-            [
-                'api_key' => config('services.convertkit.key'),
-                'email' => request('email'),
-                'tag' => ['Blog'],
-            ]
-        )->json();
-    } catch (\Exception $e) {
-        \Illuminate\Validation\ValidationException::withMessages(['email' => 'This email is invalid!']);
-    };
-
-    return redirect('/')->with('success', 'You are signed up for our newsletter');
-})->name('subscribe');
+Route::post('subscribe', NewsletterController::class)->name('subscribe');
 
 require __DIR__ . '/auth.php';

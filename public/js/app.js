@@ -2363,7 +2363,7 @@ function performTransition(el, stages, entering) {
       while (this.beforeCancels.length) {
         this.beforeCancels.shift()();
       }
-      ;
+
       finish();
     }),
     finish,

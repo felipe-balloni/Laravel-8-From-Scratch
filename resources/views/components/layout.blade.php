@@ -72,8 +72,8 @@
         </div>
 
     </footer>
-    <div class="fixed z-30 bottom-0 right-0 mr-6 mb-6 bg-gray-400 opacity-50">
-        <a id="back2Top" href="#" class="hidden text-black bg-gray-800 bg-opacity-70 rounded-md">
+    <div class="fixed z-30 bottom-0 right-0 mr-6 mb-6">
+        <a id="back2Top" href="#" class="hidden text-white bg-blue-800 bg-opacity-70 rounded-md">
             <span class="hidden">Back to Top</span>
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24" class="h-10 w-10">
                 <path fill="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" />
